@@ -7,14 +7,15 @@
  *
  * Sometimes an array of objects is easier to work with than a 2D array
  *
- * @param {Array} targetHeaders
+ *
+ *
+ * @param {2DArray} sourceArr
+ * The 2D array from which you whish to convert a clunky 2D matrix into a sleek array of JSON
+ *
+ *@param {Array} targetHeaders
  * The list of headers you want to be included on your new object as key:value pairs
  * Items in this list must exactly match the headers in sourceArr
  * Headers with invalid JavaScript keys will be excluded and logged as errors
- *
- * @param {2DArray} sourceArr
- * The 2D array from which you whish to convert a clunky matrix into a sleek array of objects
- *
  *
  * @returns {ArrayOfObjects}
  * Where key:value pairs match the existing column:row relationships in your sourceArr data
@@ -25,8 +26,10 @@
 
 // FIXME
 // make targetHeaders optional
+// would it be fair to this to
+// convert2DArrayToJson()?
 function convert2DArrayToArrayOfObjects(sourceArr = [[]], targetHeaders) {
-  const objects = [];
+  const json = [];
   const headers = sourceArr.slice(0, 1).flat();
   const body = sourceArr.slice(1);
 
@@ -42,8 +45,8 @@ function convert2DArrayToArrayOfObjects(sourceArr = [[]], targetHeaders) {
       } else {
         continue;
       }
-      objects.push(object);
+      json.push(object);
     }
   }
-  return objects;
+  return json;
 }
