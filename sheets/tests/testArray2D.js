@@ -11,6 +11,7 @@ const testData = [
 ];
 
 const array2D = new Array2D(testData);
-array2D.forEach((row) => console.log(row));
+console.log(array2D);
+// array2D.forEach((el) => console.log(el));
 const col1 = array2D.getColumn(0);
 // console.log(col1);
