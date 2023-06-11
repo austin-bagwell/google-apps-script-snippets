@@ -2,17 +2,9 @@
  * {Array[][]} data
  */
 
-// TODO
-// should Array2D extend Array?
-// https://github.com/wesbos/es6-articles/blob/master/54%20-%20Extending%20Arrays%20with%20Classes%20for%20Custom%20Collections.md
-// should any method return a 2D array return a new instance of Array2D?
-
-// this isn't quite right
-// this way means you have to do array2D.dataRange before calling any Array methods
 export default class Array2D extends Array {
   constructor(data) {
     super(...data);
-    this.dataRange = data;
   }
 
   // does this go in constructor?
