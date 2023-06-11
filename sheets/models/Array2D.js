@@ -1,15 +1,21 @@
 /**
- * {Array[][]} data
+ * Class containing utilty methods for 2D arrays with headers at index 0
+ * @extends Array
  */
-
 export default class Array2D extends Array {
+  /**
+   *
+   * @param {Array[][]} data
+   */
   constructor(data) {
     super(...data);
+    this.headers = data[0];
+    this.bodyData = data.slice(1);
+    this.rowLength = data.length;
+    this.colLength = data.length;
   }
 
-  // does this go in constructor?
   // use this to keep track of the longest row deets
-
   // get longest row / set longest row ?
   // idk if getters and setters work in GAS
   //   longestRow = { idx: 0, len: 0 };
@@ -26,16 +32,48 @@ export default class Array2D extends Array {
     return this[row];
   }
 
-  // might work better as an array of indexes?
-  // easier to cherry pick rows as needed
-  // add option to include headers at the top of the 2D row array?
+  /**
+   *
+   * @param {number} start - start of range to extract
+   * @param {number} end - exclusive end of range to extract
+   * @param {boolean} includeHeaders - indclude this.headers at [0] or not
+   * @returns
+   */
   getRowsRange(start, end, includeHeaders = false) {
+    // prevent adding headers twice if includeHeaders && starting after actual headers
+    if (includeHeaders && start > 0) {
+      return this.slice(start, end).unshift(this.headers);
+    }
     return this.slice(start, end);
   }
 
-  // ex you want rows at indexes [1,2,5]
-  getRowsByIndex() {}
+  /**
+   * Select only specified rows of data
+   * @param {Array<number>} indexes - the list of indexes to retrieve
+   * @param {boolean} includeHeaders - add this.headers as [0] if true
+   * @returns {Array<Array<any>>}
+   */
+  getRowsByIndex([...indexes], includeHeaders = false) {
+    const rows = [];
+    for (const idx of indexes) {
+      rows.push(this[idx]);
+    }
 
+    // prevent adding headers twice if alreaded passed in indexes
+    if (includeHeaders && !indexes.includes(0)) {
+      rows.unshift(this.headers);
+    }
+
+    return rows;
+  }
+
+  /**
+   *
+   * @param {number} col - index of the desired column
+   * @param {boolean} includeHeader - include header or no
+   * @returns {Array<any>}
+   */
+  //   TODO working on this, brain must be tired
   getColumn(col, includeHeader = true) {
     if (col > this.columnLen - 1) {
       throw Error("Column index out of bounds");
@@ -47,15 +85,32 @@ export default class Array2D extends Array {
       }).slice(1);
     }
 
-    return this.map((row) => {
-      return row[col];
+    return this.forEach((row, i) => {
+      if (i === col) {
+        console.log(row[i]);
+      }
     });
+    // return this.map((row) => {
+    //   return row[col];
+    // });
   }
 
-  getColumnsRange(start, end, includeHeaders = true) {}
+  /**
+   * Gets a contiguous range of columns, up to and excluding end index. Includes headers by default.
+   * @param {number} start - start index of range to extract
+   * @param {number} end - exclusive end index of range to extract
+   * @param {boolean} includeHeaders - indclude this.headers at [0] or not. Default is true
+   * @returns {Array<Array<any>>} - array containing arrays
+   */
+  getColumnsRange(start, end, includeHeaders = true) {
+    if (!includeHeaders) {
+      return this.map((row) => row.slice(start, end)).slice(1);
+    }
+    return this.map((row) => row.slice(start, end));
+  }
 
   // ex you want columns at indexes [0,2,5]
-  getColumnsByIndex(indexes = [], includeHeaders = true) {}
+  getColumnsByIndex([...indexes], includeHeaders = true) {}
 
   // like slice but 2D
   // different behavior if !headers ?
