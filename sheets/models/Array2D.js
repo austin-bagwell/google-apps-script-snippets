@@ -23,11 +23,7 @@ export default class Array2D extends Array {
   //   longestRow = { idx: 0, len: 0 };
 
   getCell(row, col) {
-    if (!row || !col) {
-      throw Error("Parameters row & col are required");
-    }
-
-    return this.dataRange[row][col];
+    return this[row][col];
   }
 
   getRow(row) {
