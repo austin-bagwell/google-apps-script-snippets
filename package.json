@@ -4,8 +4,10 @@
   "description": "A compilation of snippets, utility classes and functions, and project examples",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node ./sheets/tests/testArray2D.js"
   },
+  "type": "module",
   "keywords": [
     "google",
     "apps",
