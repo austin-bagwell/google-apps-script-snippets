@@ -11,7 +11,3 @@ const testData = [
 ];
 
 const array2D = new Array2D(testData);
-
-// console.log(array2D[0][0]);
-// console.log(array2D);
-// console.log(array2D.dataRange);

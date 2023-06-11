@@ -31,14 +31,14 @@ export default class Array2D extends Array {
       throw Error("Row index out of bounds");
     }
 
-    return this.dataRange[row];
+    return this[row];
   }
 
   // might work better as an array of indexes?
   // easier to cherry pick rows as needed
   // add option to include headers at the top of the 2D row array?
   getRowsRange(start, end, includeHeaders = false) {
-    return this.data.slice(start, end);
+    return this.slice(start, end);
   }
 
   // ex you want rows at indexes [1,2,5]
@@ -50,14 +50,12 @@ export default class Array2D extends Array {
     }
 
     if (!includeHeader) {
-      return this.dataRange
-        .map((row) => {
-          return row[col];
-        })
-        .slice(1);
+      return this.map((row) => {
+        return row[col];
+      }).slice(1);
     }
 
-    return this.dataRange.map((row) => {
+    return this.map((row) => {
       return row[col];
     });
   }
