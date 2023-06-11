@@ -2,6 +2,11 @@
  * {Array[][]} data
  */
 
+// TODO
+// should Array2D extend Array?
+// https://github.com/wesbos/es6-articles/blob/master/54%20-%20Extending%20Arrays%20with%20Classes%20for%20Custom%20Collections.md
+// should any method return a 2D array return a new instance of Array2D?
+
 // consider renaming class to Datarange to line up with range.getDatarange().getValues() in GAS
 // different implementation if !headers ?
 export default class Array2D {
@@ -25,18 +30,10 @@ export default class Array2D {
       throw Error("Parameters row & col are required");
     }
 
-    if (!Number.parseInt(row) || !Number.parseInt(col)) {
-      throw Error("Arguments to row & col must be a number");
-    }
-
     return this.dataRange[row][col];
   }
 
   getRow(row) {
-    if (!Number.parseInt(row)) {
-      throw Error("Argument to row must be a number");
-    }
-
     if (row > this.rowLen - 1) {
       throw Error("Row index out of bounds");
     }
@@ -44,17 +41,38 @@ export default class Array2D {
     return this.dataRange[row];
   }
 
-  getRows(start, end) {
+  // might work better as an array of indexes?
+  // easier to cherry pick rows as needed
+  // add option to include headers at the top of the 2D row array?
+  getRowsRange(start, end, includeHeaders = false) {
     return this.data.slice(start, end);
   }
 
-  getColumn(col) {}
+  // ex you want rows at indexes [1,2,5]
+  getRowsByIndex() {}
 
-  getColumns(col) {}
+  getColumn(col, includeHeader = true) {
+    if (col > this.columnLen - 1) {
+      throw Error("Column index out of bounds");
+    }
 
-  //   ex you want a new 2D array with only column indexes [0,2,3]
-  // returns new Array2D
-  reduceToXColumns(headerIdx = []) {}
+    if (!includeHeader) {
+      return this.dataRange
+        .map((row) => {
+          return row[col];
+        })
+        .slice(1);
+    }
+
+    return this.dataRange.map((row) => {
+      return row[col];
+    });
+  }
+
+  getColumnsRange(start, end, includeHeaders = true) {}
+
+  // ex you want columns at indexes [0,2,5]
+  getColumnsByIndex(indexes = [], includeHeaders = true) {}
 
   // like slice but 2D
   // different behavior if !headers ?
@@ -67,6 +85,7 @@ export default class Array2D {
 
   // is this the formula I want? do I even know? lol
   // where Array2D[0][0] = { row:0, col:0 }
+  // add handling for n number of coords, I think is possible w/ that formula?
   getDistance({ row1, col1, row2, col2 }) {
     const distance = Math.sqrt(
       Math.pow(row2 - row1, 2) + Math.pow(col2 - col1, 2)
