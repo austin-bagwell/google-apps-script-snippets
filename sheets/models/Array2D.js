@@ -98,11 +98,17 @@ export default class Array2D extends Array {
    * @param {boolean} includeHeaders - indclude this.headers at [0] or not. Default is true
    * @returns {Array<Array<any>>} - array containing arrays
    */
+
   getColumnsRange(start, end, includeHeaders = true) {
-    if (!includeHeaders) {
-      return this.map((row) => row.slice(start, end)).slice(1);
+    const columns = [];
+
+    for (let i = start; i < end; i++) {
+      const column = includeHeaders
+        ? this.getColumn(i, includeHeaders)
+        : this.getColumn(i, includeHeaders).slice(1);
+      columns.push(column);
     }
-    return this.map((row) => row.slice(start, end));
+    return columns;
   }
 
   // ex you want columns at indexes [0,2,5]
