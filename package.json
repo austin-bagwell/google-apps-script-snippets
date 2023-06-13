@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node ./sheets/tests/testArray2D.js"
+    "test": "jest"
   },
   "type": "module",
   "keywords": [
@@ -16,5 +16,8 @@
     "gas"
   ],
   "author": "Austin Bagwell",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^29.5.0"
+  }
 }
