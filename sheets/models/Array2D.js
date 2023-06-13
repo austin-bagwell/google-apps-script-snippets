@@ -73,26 +73,22 @@ export default class Array2D extends Array {
    * @param {boolean} includeHeader - include header or no
    * @returns {Array<any>}
    */
-  //   TODO working on this, brain must be tired
   getColumn(col, includeHeader = true) {
     if (col > this.columnLen - 1) {
       throw Error("Column index out of bounds");
     }
 
+    const column = [];
+
     if (!includeHeader) {
-      return this.map((row) => {
-        return row[col];
-      }).slice(1);
+      this.forEach((row) => {
+        column.push(row[col]);
+      });
+      return column.slice(1);
     }
 
-    return this.forEach((row, i) => {
-      if (i === col) {
-        console.log(row[i]);
-      }
-    });
-    // return this.map((row) => {
-    //   return row[col];
-    // });
+    this.forEach((row) => column.push(row[col]));
+    return column;
   }
 
   /**

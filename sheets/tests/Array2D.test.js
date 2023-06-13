@@ -1,6 +1,6 @@
 import { jest } from "@jest/globals";
-import Array2D from "../models/Array2D.js";
 jest.mock("../models/Array2D.js");
+import Array2D from "../models/Array2D.js";
 
 const testData = [
   ["0A HEADER", "0B HEADER", "0C HEADER", "0D HEADER", "0E HEADER"],

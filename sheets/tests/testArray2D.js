@@ -12,4 +12,6 @@ const testData = [
 
 const array2D = new Array2D(testData);
 const rowIdxs = [0, 2];
-console.log(array2D.getColumn(1));
+// console.log(array2D.getCell(1, 1));
+// console.log(array2D.getCell(1, 1));
+console.log(array2D.getColumn(0, false));
