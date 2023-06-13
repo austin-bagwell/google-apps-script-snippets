@@ -49,18 +49,18 @@ export default class Array2D extends Array {
 
   /**
    * Select only specified rows of data
-   * @param {Array<number>} indexes - the list of indexes to retrieve
+   * @param {Array<number>} rowIndexes - the list of rowIndexes to retrieve
    * @param {boolean} includeHeaders - add this.headers as [0] if true
    * @returns {Array<Array<any>>}
    */
-  getRowsByIndex([...indexes], includeHeaders = false) {
+  getRowsByIndex([...rowIndexes], includeHeaders = false) {
     const rows = [];
-    for (const idx of indexes) {
+    for (const idx of rowIndexes) {
       rows.push(this[idx]);
     }
 
-    // prevent adding headers twice if alreaded passed in indexes
-    if (includeHeaders && !indexes.includes(0)) {
+    // prevent adding headers twice if alreaded passed in rowIndexes
+    if (includeHeaders && !rowIndexes.includes(0)) {
       rows.unshift(this.headers);
     }
 
@@ -106,7 +106,16 @@ export default class Array2D extends Array {
   }
 
   // ex you want columns at indexes [0,2,5]
-  getColumnsByIndex([...indexes], includeHeaders = true) {}
+  getColumnsByIndex([...columnIndexes], includeHeaders = true) {
+    const columns = [];
+
+    for (const idx of columnIndexes) {
+      const column = this.getColumn(idx, includeHeaders);
+      columns.push(column);
+    }
+
+    return columns;
+  }
 
   // like slice but 2D
   // different behavior if !headers ?
