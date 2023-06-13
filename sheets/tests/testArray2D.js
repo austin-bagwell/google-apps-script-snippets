@@ -15,6 +15,6 @@ const rowIdxs = [0, 2];
 const colIdxs = [0, 2];
 // console.log(array2D.getCell(1, 1));
 
-// console.log(array2D.getColumn(0));
-// console.log(array2D.getColumnsByIndex(colIdxs));
-console.log(array2D.getColumnsRange(0, 5, false));
+console.log(array2D.getColumn(0));
+console.log(array2D.getColumnsByIndex(colIdxs));
+console.log(array2D.getColumnsRange(0, 5));

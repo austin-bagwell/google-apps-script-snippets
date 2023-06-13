@@ -98,7 +98,6 @@ export default class Array2D extends Array {
    * @param {boolean} includeHeaders - indclude this.headers at [0] or not. Default is true
    * @returns {Array<Array<any>>} - array containing arrays
    */
-
   getColumnsRange(start, end, includeHeaders = true) {
     const columns = [];
 
@@ -112,6 +111,12 @@ export default class Array2D extends Array {
   }
 
   // ex you want columns at indexes [0,2,5]
+  /**
+   *
+   * @param {Array<number>} columnIndexes - an array of column indexes
+   * @param {boolean} includeHeaders - whether to include headers on the returned columns
+   * @returns {Array<Array<any>>} - array containing arrays
+   */
   getColumnsByIndex([...columnIndexes], includeHeaders = true) {
     const columns = [];
 
