@@ -87,6 +87,8 @@ class TestOrder extends Order {
   }
 }
 
+// loose implementation/interpretation of Abstract Factory design pattern
+// https://refactoring.guru/design-patterns/abstract-factory
 function OrderFactory(order) {
   const location = order.location;
 
@@ -98,8 +100,12 @@ function OrderFactory(order) {
     case 'TEST':
       return new TestOrder(order);
     default:
-      Logger.log('Roastery location needs to be DUR or SF');
-      break;
+      const name = order.customerName;
+      const poNum = order.poNum;
+      const location = order.location;
+      const message = `Order ${name} ${poNum} has invalid location '${location}'. Location must be 'DUR', 'SF', or 'TEST'`;
+      SpreadsheetApp.getUi().alert(message);
+      throw new Error(message);
   }
 };
 
