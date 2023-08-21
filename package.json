@@ -1,0 +1,23 @@
+{
+  "name": "google-apps-script-snippets",
+  "version": "1.0.0",
+  "description": "A compilation of snippets, utility classes and functions, and project examples",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node ./sheets/tests/testArray2D.js"
+  },
+  "type": "module",
+  "keywords": [
+    "google",
+    "apps",
+    "script",
+    "google apps script",
+    "gas"
+  ],
+  "author": "Austin Bagwell",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^29.5.0"
+  }
+}
